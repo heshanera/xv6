@@ -74,3 +74,6 @@ struct proc {
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
+
+// Return a pointer to the process table
+struct proc * getptable(void);

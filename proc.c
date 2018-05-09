@@ -456,4 +456,7 @@ procdump(void)
   }
 }
 
-
+struct proc * getptable(void)
+{
+  return &(ptable.proc[0]);
+}

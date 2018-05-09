@@ -98,3 +98,40 @@ int sys_setpriority(void)
   proc->priority = (int)n;
   return n;
 }
+
+int sys_getprocessinfo(void)
+{
+  int size;
+  char * buf;
+  char * s;
+  int i = 0;
+  struct proc * process;
+
+  if (argint(0, &size) < 0) {
+    return -1;
+  }
+
+  if (argptr(1, &buf,size) < 0) {
+    return -1;
+  }
+
+  s = buf;
+  process = getptable();
+
+  while(buf + size > s) {
+    *(int *)s = process->pid;
+    s += 4;
+    *(int *)s = process->sz;
+    s += 4;
+    i =  0;
+    while( i < 16){
+      *s = *(process->name+i);
+      s++; i++;
+    }
+    *(int *)s = process->priority;
+    s += 4;
+    process++;
+  }
+
+  return 1;
+}
