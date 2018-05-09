@@ -6,6 +6,7 @@
 #include "fcntl.h"
 
 char *argv[] = { "sh", 0 };
+char *argv2[] = {};
 
 int
 main(void)
@@ -20,6 +21,16 @@ main(void)
   dup(0);  // stderr
 
   for(;;){
+
+    // starting a background process
+    pid = fork();
+    if(pid == 0){
+      exec("prog", argv2);
+      exit();
+    } else if(pid > 0){
+      sleep(50);
+    }
+
     printf(1, "init: starting sh\n");
     pid = fork();
     if(pid < 0){
