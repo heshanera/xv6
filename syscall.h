@@ -21,4 +21,5 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_setpriority 22
-#define SYS_getprocessinfo 23
+#define SYS_getinodesize 23
+#define SYS_getprocessinfo 24

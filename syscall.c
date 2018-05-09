@@ -99,6 +99,7 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_setpriority(void);
+extern int sys_getinodesize(void);
 extern int sys_getprocessinfo(void);
 
 static int (*syscalls[])(void) = {
@@ -124,6 +125,7 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_setpriority] sys_setpriority,
+[SYS_getinodesize] sys_getinodesize,
 [SYS_getprocessinfo] sys_getprocessinfo,
 };
 
