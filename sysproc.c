@@ -130,6 +130,8 @@ int sys_getprocessinfo(void)
     }
     *(int *)s = process->priority;
     s += 4;
+    *(int *)s = process->state;
+    s += 4;
     process++;
   }
 

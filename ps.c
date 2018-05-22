@@ -4,11 +4,15 @@
 
 #define NUM_STRUCTS 10
 
+enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
+char * pstate[] = { "U", "E", "S", "RNBL", "R", "Z" };
+
 struct procdetails {
   int pid;		  // Process ID
   int psize;		  // Size of process memory (bytes)
   char pname[16];	  // Process name
   int priority;		  // Priority of the process
+  enum procstate pstate;  // Process state
 };
 
 int main(void) {
@@ -24,16 +28,16 @@ int main(void) {
   p = &proc_det_arr[0];
 
   printf(
-    1,"%s    %s    %s    %s\n",
-    "PID","MEMORY(Bytes)","PRIORITY","PROCESS"
+    1,"%s %s     %s %s  %s\n",
+    "PID","MEM","STAT","PRIO","PROC"
   );
 
   while( p != &proc_det_arr[NUM_STRUCTS-1]) {
     if ((p->pid == 0 ) && (p->psize == 0)) break;
     printf(
-      1," %d       %d             %d        %s\n",
+      1,"  %d %dB     %s    %d  %s\n",
 
-      p->pid, p->psize, p->priority, p->pname
+      p->pid, p->psize, pstate[p->pstate], p->priority, p->pname
     );
     p++;
   }
