@@ -5,6 +5,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "guestSysCalls.h"
 
 int
 sys_fork(void)
@@ -136,4 +137,25 @@ int sys_getprocessinfo(void)
   }
 
   return 1;
+}
+
+int sys_vmtrap(void)
+{
+  int n, i, vm;
+  char vmname[] = "guestVM";
+  if(argint(0, &n) < 0)
+    return -1;
+  i = 0;
+  while(1) {
+    if (*(proc->parent->name + i) != *(vmname+i)) {
+      vm = 0; break;
+    }
+    i++;
+    if (i == 7) { vm = 1; break;}
+  }
+  if (vm == 1) return gtrap(n);
+  else {
+    kill(proc->pid);
+    return 0;
+  }
 }

@@ -101,6 +101,7 @@ extern int sys_uptime(void);
 extern int sys_setpriority(void);
 extern int sys_getinodesize(void);
 extern int sys_getprocessinfo(void);
+extern int sys_vmtrap(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -127,6 +128,7 @@ static int (*syscalls[])(void) = {
 [SYS_setpriority] sys_setpriority,
 [SYS_getinodesize] sys_getinodesize,
 [SYS_getprocessinfo] sys_getprocessinfo,
+[SYS_vmtrap] sys_vmtrap,
 };
 
 void

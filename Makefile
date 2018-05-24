@@ -27,6 +27,7 @@ OBJS = \
 	uart.o\
 	vectors.o\
 	vm.o\
+	guestSysCalls.o\
 
 # Cross-compiling (e.g., on Mac OS X)
 #TOOLPREFIX = i386-jos-elf-
@@ -172,6 +173,8 @@ UPROGS=\
 	_zombie\
 	_ps\
 	_prog\
+	_guestVM\
+	_application\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
